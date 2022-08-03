@@ -1,10 +1,26 @@
-import { incrementCustomProperty } from "./updateCustomsProperty.js";
+import {
+  getCustomProperty,
+  incrementCustomProperty,
+  setCustomProperty,
+  getCustomProperty
+} from "./updateCustomsProperty.js";
 
 const SPEED = 0.05;
 const groundElems =  document.querySelectorAll("[data-ground]");
 
+// makes the ground animation move left
+export function setUpGround() {
+  setCustomProperty(groundElems[0], "--left", 0)
+  setCustomProperty(groundElems[1], "--left", 300)
+}
+
 export function updateGround(delta) {
   groundElems.forEach(ground => {
     incrementCustomProperty(ground, "--left", delta * SPEED * -1)
+
+    // loops the ground animation
+    if (getCustomProperty(ground, "--left") <= -300) {
+      incrementCustomProperty(ground, "--left", 600)
+    }
   })
 };
