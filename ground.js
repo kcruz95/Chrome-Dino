@@ -14,9 +14,9 @@ export function setUpGround() {
   setCustomProperty(groundElems[1], "--left", 300)
 }
 
-export function updateGround(delta) {
+export function updateGround(delta, speedScale) {
   groundElems.forEach(ground => {
-    incrementCustomProperty(ground, "--left", delta * SPEED * -1)
+    incrementCustomProperty(ground, "--left", delta * speedScale * SPEED * -1)
 
     // loops the ground animation
     if (getCustomProperty(ground, "--left") <= -300) {
