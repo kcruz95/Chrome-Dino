@@ -1,16 +1,20 @@
-import { setUpGround, updateGround } from './ground.js'
-const WORLD_WIDTH = 100
-const WORLD_HEIGHT = 30
+import { setUpGround, updateGround } from './ground.js';
+const WORLD_WIDTH = 100;
+const WORLD_HEIGHT = 30;
+const SPEED_SCALE_INCREASE = 0.00001;
 
 const worldElem = document.querySelector('[data-world]');
+const scoreElem = document.querySelector('[data-score');
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale);
-document.addEventListener("keydown", handleStart, {once: true });
+document.addEventListener("keydown", handleStart, { once: true });
 
 setUpGround()
 
-let lastTime
+let lastTime;
+let speedScale;
+let score;
 function update(time) {
   if (lastTime == null) {
     lastTime = time
@@ -19,13 +23,32 @@ function update(time) {
   }
   const delta = time - lastTime
   
-  updateGround(delta)
+  updateGround(delta, speedScale);
+  updateSpeedScale(delta);
+  updateScore(delta);
 
-  lastTime = time
+  lastTime = time;
   window.requestAnimationFrame(update);
 };
 
-window.requestAnimationFrame(update)
+// ground speed
+function updateSpeedScale(delta) {
+ speedScale += SPEED_SCALE_INCREASE;
+};
+
+// add and update score
+function updateScore(delta) {
+  score += delta * 0.01;
+  scoreElem.textContent = Math.floor(score);
+}
+
+// ground starts to move at press of any key
+function handleStart() {
+  lastTime = null;
+  speedScale = 1;
+  setUpGround()
+  window.requestAnimationFrame(update);
+};
 
 function setPixelToWorldScale() {
   let worldToPixelScale
