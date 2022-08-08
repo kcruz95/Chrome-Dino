@@ -5,6 +5,7 @@ const SPEED_SCALE_INCREASE = 0.00001;
 
 const worldElem = document.querySelector('[data-world]');
 const scoreElem = document.querySelector('[data-score');
+const startScreenElem = document.querySelector('[data-start-screen');
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale);
@@ -46,7 +47,8 @@ function updateScore(delta) {
 function handleStart() {
   lastTime = null;
   speedScale = 1;
-  setUpGround()
+  setUpGround();
+  startScreenElem.classList.add("hide"); // hides the "Press Any Key to Start display"
   window.requestAnimationFrame(update);
 };
 
