@@ -1,4 +1,6 @@
 import { setUpGround, updateGround } from './ground.js';
+import { setUpDino, updateDino } from './dino.js';
+
 const WORLD_WIDTH = 100;
 const WORLD_HEIGHT = 30;
 const SPEED_SCALE_INCREASE = 0.00001;
@@ -25,6 +27,7 @@ function update(time) {
   const delta = time - lastTime
   
   updateGround(delta, speedScale);
+  updateDino(delta, speedScale);
   updateSpeedScale(delta);
   updateScore(delta);
 
@@ -48,6 +51,7 @@ function handleStart() {
   lastTime = null;
   speedScale = 1;
   setUpGround();
+  setUpDino();
   startScreenElem.classList.add("hide"); // hides the "Press Any Key to Start display"
   window.requestAnimationFrame(update);
 };
