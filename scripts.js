@@ -1,5 +1,6 @@
 import { setUpGround, updateGround } from './ground.js';
 import { setUpDino, updateDino } from './dino.js';
+import { setUpCactus, updateCactus } from './cactus.js';
 
 const WORLD_WIDTH = 100;
 const WORLD_HEIGHT = 30;
@@ -30,7 +31,8 @@ function update(time) {
   updateDino(delta, speedScale);
   updateSpeedScale(delta);
   updateScore(delta);
-
+  updateCactus(delta)
+;
   lastTime = time;
   window.requestAnimationFrame(update);
 };
@@ -52,6 +54,7 @@ function handleStart() {
   speedScale = 1;
   setUpGround();
   setUpDino();
+  setUpCactus();
   startScreenElem.classList.add("hide"); // hides the "Press Any Key to Start display"
   window.requestAnimationFrame(update);
 };
