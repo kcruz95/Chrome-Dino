@@ -29,6 +29,13 @@ export function updateCactus(delta, speedScale) {
   nextCactusTime -= delta;
 };
 
+// `...` === spread operator
+export function getCactusRects() {
+  return [...document.querySelectorAll("[data-cactus]")].map(cactus => {
+    return cactus.getBoundingClientRect();
+  });
+};
+
 // create cacti to show up on the right side of the screen
 function createCactus() {
   const cactus = document.createElement("div");
